@@ -1,0 +1,76 @@
+CREATE TABLE student(
+stu_id INT PRIMARY KEY,
+first_name VARCHAR(20),
+last_name VARCHAR(20),
+email VARCHAR(30),
+phone INT);
+
+CREATE TABLE course(
+course_id INT PRIMARY KEY,
+course_name VARCHAR(40));
+
+CREATE TABLE batch(
+batch_id INT PRIMARY KEY,
+batch_name VARCHAR(30));
+
+CREATE TABLE mentor(
+mentor_id INT PRIMARY KEY,
+first_name VARCHAR(25),
+last_name VARCHAR(25),
+email VARCHAR(30),
+course_id INT, 
+FOREIGN KEY(course_id) REFERENCES course(course_id));
+
+CREATE TABLE mock_interview(
+mock_id INT PRIMARY KEY,
+topic VARCHAR(40));
+
+CREATE TABLE assesment(
+asses_id INT PRIMARY KEY,
+asses_topic VARCHAR(30));
+
+CREATE TABLE task(
+task_id INT PRIMARY KEY,
+task_topic VARCHAR(50));
+
+CREATE TABLE codekata(
+code_id INT PRIMARY KEY,
+code_question VARCHAR(100));
+
+CREATE TABLE webkata(
+web_id INT PRIMARY KEY,
+web_question VARCHAR(100));
+
+CREATE TABLE attendance(
+att_id INT PRIMARY KEY,
+att_status BOOLEAN);
+
+CREATE TABLE feedback(
+feedback_id INT PRIMARY KEY,
+stu_id INT,
+feedback VARCHAR(100),
+FOREIGN KEY (stu_id) REFERENCES student(stu_id));
+
+CREATE TABLE student_course(
+stu_id INT,
+course_id INT,
+batch_id INT,
+mentor_id INT,
+mock_id INT,
+asses_id INT,
+task_id INT,
+code_id INT,
+web_id INT,
+feedback_id INT,
+att_id INT,
+FOREIGN KEY (stu_id) REFERENCES student(stu_id),
+FOREIGN KEY(course_id) REFERENCES course(course_id),
+FOREIGN KEY (batch_id) REFERENCES batch(batch_id),
+FOREIGN KEY (mentor_id) REFERENCES mentor(mentor_id),
+FOREIGN KEY (mock_id) REFERENCES mock_interview(mock_id),
+FOREIGN KEY (asses_id) REFERENCES assesment(asses_id),
+FOREIGN KEY (task_id) REFERENCES task(task_id),
+FOREIGN KEY (code_id) REFERENCES codekata(code_id),
+FOREIGN KEY (web_id) REFERENCES webkata(web_id),
+FOREIGN KEY (feedback_id) REFERENCES feedback(feedback_id),
+FOREIGN KEY (att_id) REFERENCES attendance(att_id));
